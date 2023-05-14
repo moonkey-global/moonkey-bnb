@@ -1,11 +1,6 @@
 import { ethers } from 'ethers';
 import { fillAndSign, fillUserOp, getUserOpHash } from './UserOp';
 import { getHttpRpcClient } from './getHttpRpcClient';
-import {
-	MoonKeyGnosisSafeAccountFactory__factory,
-	EntryPoint__factory,
-	MoonKeyPluginSafe__factory,
-} from '../typechains';
 import { arrayify } from 'ethers/lib/utils';
 import { accountAddress, entrypointAddress } from '../constants';
 

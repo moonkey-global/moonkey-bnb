@@ -1,8 +1,8 @@
-export const entrypointAddress = '0x0576a174D229E3cFA37253523E645A78A0C91B57'; //EntryPoint
+export const entrypointAddress = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'; //EntryPoint
 export const paymasterAddress = '0x6D0Bc38A66DCe1Eb51D0fb087abAD151Ac49cD2F'; //VerifyingPaymaster
-export const accountAddress = '0x0264924771Cb1D359B8bb8631927522893120a1D'; //MoonKeyGonosisAccountFactory
+export const accountAddress = '0x0E1c853Cc60f5f1bB4D6e830C8257b75672919d1'; //MoonKeyGonosisAccountFactory
 export const safeSingletonAddress =
-	'0xC9a870C19738F6F177a6BAE7991B19c0b30aa215'; //MoonKeyPluginSafe
+	'0x5711Fd2d656942895763ac2FC5824607Ef6b5C92'; //MoonKeyPluginSafe
 export const VALID_UNTIL = 1777068462;
 export const VALID_AFTER = 0;
 export const USDCAddress = '0xe11A86849d99F524cAC3E7A0Ec1241828e332C62';

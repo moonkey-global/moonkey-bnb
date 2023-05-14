@@ -5,8 +5,8 @@ export const particleValue = {
 	projectId: projectId,
 	clientKey: clientKey,
 	appId: appId,
-	chainName: 'BSC', //optional: current chain name, default Ethereum.
-	chainId: 97, //optional: current chain id, default 1.
+	chainName: 'Polygon', //optional: current chain name, default Ethereum.
+	chainId: 80001, //optional: current chain id, default 1.
 	// wallet: {
 	// 	//optional: by default, the wallet entry is displayed in the bottom right corner of the webpage.
 	// 	displayWalletEntry: false, //show wallet entry when connect particle.

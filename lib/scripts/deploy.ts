@@ -6,11 +6,6 @@ import {
 } from 'ethers/lib/utils';
 import { ethers } from 'ethers';
 import { fillAndSign, fillUserOp } from './UserOp';
-import {
-	MoonKeyGnosisSafeAccountFactory__factory,
-	EntryPoint__factory,
-} from '../typechains';
-//import { _abi } from '../typechains/MoonKeyGnosisSafeAccountFactory__factory';
 import { getUserOpHash } from './UserOp';
 import { UserOperation } from './UserOperation';
 import { getHttpRpcClient } from './getHttpRpcClient';
@@ -22,6 +17,7 @@ import {
 	entrypointAddress,
 	accountAddress,
 } from '../constants';
+import { MoonKeyGnosisSafeAccountFactory__factory } from '../typechains/MoonKeyGnosisSafeAccountFactory__factory';
 
 export async function deploy(
 	ownerAddress: string,
@@ -78,7 +74,7 @@ export async function fillOp(
 	const op = {
 		sender: counterfactualAddress,
 		initCode,
-		verificationGasLimit: 400000,
+		verificationGasLimit: 1000000,
 	};
 	const op2 = await fillUserOp(
 		op,
@@ -105,7 +101,7 @@ export async function fillOpPaymaster(
 	const op = {
 		sender: counterfactualAddress,
 		initCode,
-		verificationGasLimit: 400000,
+		verificationGasLimit: 1000000,
 		paymasterAndData: hexConcat([
 			paymasterAddress,
 			defaultAbiCoder.encode(['uint48', 'uint48'], [VALID_UNTIL, VALID_AFTER]),
@@ -193,7 +189,7 @@ async function main() {
 		{
 			sender: counterfactualAddress,
 			initCode,
-			verificationGasLimit: 400000,
+			verificationGasLimit: 100000,
 		},
 		owner,
 		entryPoint

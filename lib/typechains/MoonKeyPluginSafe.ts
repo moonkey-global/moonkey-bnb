@@ -88,6 +88,7 @@ export interface MoonKeyPluginSafeInterface extends utils.Interface {
 		'executeAndRevert(address,uint256,bytes,uint8)': FunctionFragment;
 		'getChainId()': FunctionFragment;
 		'getModulesPaginated(address,uint256)': FunctionFragment;
+		'getNonce()': FunctionFragment;
 		'getOwners()': FunctionFragment;
 		'getStorageAt(uint256,uint256)': FunctionFragment;
 		'getThreshold()': FunctionFragment;
@@ -128,6 +129,7 @@ export interface MoonKeyPluginSafeInterface extends utils.Interface {
 			| 'executeAndRevert'
 			| 'getChainId'
 			| 'getModulesPaginated'
+			| 'getNonce'
 			| 'getOwners'
 			| 'getStorageAt'
 			| 'getThreshold'
@@ -263,6 +265,7 @@ export interface MoonKeyPluginSafeInterface extends utils.Interface {
 		functionFragment: 'getModulesPaginated',
 		values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
 	): string;
+	encodeFunctionData(functionFragment: 'getNonce', values?: undefined): string;
 	encodeFunctionData(functionFragment: 'getOwners', values?: undefined): string;
 	encodeFunctionData(
 		functionFragment: 'getStorageAt',
@@ -430,6 +433,7 @@ export interface MoonKeyPluginSafeInterface extends utils.Interface {
 		functionFragment: 'getModulesPaginated',
 		data: BytesLike
 	): Result;
+	decodeFunctionResult(functionFragment: 'getNonce', data: BytesLike): Result;
 	decodeFunctionResult(functionFragment: 'getOwners', data: BytesLike): Result;
 	decodeFunctionResult(
 		functionFragment: 'getStorageAt',
@@ -810,6 +814,8 @@ export interface MoonKeyPluginSafe extends BaseContract {
 			overrides?: CallOverrides
 		): Promise<[string[], string] & { array: string[]; next: string }>;
 
+		getNonce(overrides?: CallOverrides): Promise<[BigNumber]>;
+
 		getOwners(overrides?: CallOverrides): Promise<[string[]]>;
 
 		getStorageAt(
@@ -1035,6 +1041,8 @@ export interface MoonKeyPluginSafe extends BaseContract {
 		overrides?: CallOverrides
 	): Promise<[string[], string] & { array: string[]; next: string }>;
 
+	getNonce(overrides?: CallOverrides): Promise<BigNumber>;
+
 	getOwners(overrides?: CallOverrides): Promise<string[]>;
 
 	getStorageAt(
@@ -1259,6 +1267,8 @@ export interface MoonKeyPluginSafe extends BaseContract {
 			pageSize: PromiseOrValue<BigNumberish>,
 			overrides?: CallOverrides
 		): Promise<[string[], string] & { array: string[]; next: string }>;
+
+		getNonce(overrides?: CallOverrides): Promise<BigNumber>;
 
 		getOwners(overrides?: CallOverrides): Promise<string[]>;
 
@@ -1581,6 +1591,8 @@ export interface MoonKeyPluginSafe extends BaseContract {
 			overrides?: CallOverrides
 		): Promise<BigNumber>;
 
+		getNonce(overrides?: CallOverrides): Promise<BigNumber>;
+
 		getOwners(overrides?: CallOverrides): Promise<BigNumber>;
 
 		getStorageAt(
@@ -1806,6 +1818,8 @@ export interface MoonKeyPluginSafe extends BaseContract {
 			pageSize: PromiseOrValue<BigNumberish>,
 			overrides?: CallOverrides
 		): Promise<PopulatedTransaction>;
+
+		getNonce(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
 		getOwners(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

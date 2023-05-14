@@ -65,7 +65,7 @@ function CreateAccount() {
 						)}`,
 						{ id: notification, duration: 5000 }
 					);
-					router.push(`/transfers/${smartAccountAddress}`);
+					router.push(`/asset/${smartAccountAddress}`);
 					return;
 				}
 				const signature = await signer.signMessage(res.message);
@@ -108,9 +108,9 @@ function CreateAccount() {
 	}, [accountsList]);
 
 	return (
-		<div className='min-h-full flex space-x-4 items-center justify-center mt-4'>
+		<div>
 			<div className=' hover:shadow ml-2 w-96 p-4 rounded-lg bg-white shadow ring-1 ring-black ring-opacity-5'>
-				{/* <ConnectButton />
+				{/* <ConnectButton /> <div className='min-h-full flex space-x-4 items-center justify-center mt-4'>
 				<br />
 				<ConnectButton.Custom>
 					{({ account, openConnectModal }) => (
@@ -160,7 +160,7 @@ function CreateAccount() {
 							<button
 								onClick={() => {
 									// changeAddress!(account);
-									router.push('/moons');
+									router.push(`/moons/${account}`);
 								}}
 								className='cursor-pointer bg-transparent border-none p-2 mb-2'
 							>
@@ -170,6 +170,7 @@ function CreateAccount() {
 						</div>
 					))}
 			</div>
+			<div className="bg-local bg-[url('/moon.png')]">BNB</div>
 		</div>
 	);
 }
