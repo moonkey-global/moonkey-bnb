@@ -1,4 +1,5 @@
 @tailwind base;
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap')
 @tailwind components;
 @tailwind utilities;
 
@@ -91,9 +92,7 @@
 
 		--radius: 0.5rem;
 	}
-}
 
-@layer base {
 	* {
 		@apply border-border;
 	}

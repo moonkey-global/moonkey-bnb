@@ -15,6 +15,9 @@ module.exports = {
 			},
 		},
 		extend: {
+			fontFamily: {
+				Kelly: ['Kelly Slab', 'cursive'],
+			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic':
