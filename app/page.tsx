@@ -53,7 +53,9 @@ export default function Home() {
 					<img src='/moon.png' className='m-4 h-20 w-20' />
 				</div>
 				<div className='min-h-full flex flex-col items-center justify-center'>
-					<p className='font-Kelly text-3xl font-bold'>Who's using MoonKey?</p>
+					<p className='font-Kelly text-3xl font-bold'>
+						Who&apos;s using MoonKey?
+					</p>
 					<p className='text-2xl'>
 						With MoonKey profiles you can separate all your wallet stuff. Create
 						profiles

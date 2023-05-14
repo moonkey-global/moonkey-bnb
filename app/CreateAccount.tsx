@@ -181,7 +181,7 @@ function CreateAccount() {
 						<DialogTitle>Create profile</DialogTitle>
 						<DialogDescription>
 							Make changes to your profile here. Click save and connect when
-							you're done.
+							you&apos;re done.
 						</DialogDescription>
 					</DialogHeader>
 					<div className='grid gap-4 py-4'>
