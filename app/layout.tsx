@@ -1,7 +1,5 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import ClientProvider from '@/components/ClientProvider';
 
 export const metadata = {
 	title: 'Moonkey',
@@ -15,7 +13,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={inter.className}>{children}</body>
+			<body>
+				<ClientProvider>{children}</ClientProvider>
+			</body>
 		</html>
 	);
 }
