@@ -60,9 +60,9 @@ function CreateAccount() {
 	const handleCreateAccount = async () => {
 		const notification = toast.loading(`SigningIn...`, { duration: 2000 });
 		try {
-			if (!particle.auth.isLogin()) logIn!();
+			if (!particle.auth.isLogin() || !provider) logIn!();
 
-			if (changeAddress) {
+			if (changeAddress && provider) {
 				const prov = provider;
 				// new ethers.providers.JsonRpcProvider(
 				// 	`https://bsc-testnet.nodereal.io/v1/${process.env.NEXT_PUBLIC_NODEREAL_PROVIDER}`
@@ -265,9 +265,11 @@ function CreateAccount() {
 										<Label htmlFor='star'>Stars here</Label>
 										<Button
 											variant='secondary'
-											onClick={() => {
-												//router.push(`/moons/${account}`)
+											onClick={async () => {
+												// logOut!();
+												await handleCreateAccount();
 												console.log('Pushed to moons', account);
+												router.push(`/moons/${account}`);
 											}}
 										>
 											Connect

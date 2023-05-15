@@ -1,5 +1,5 @@
 export const entrypointAddress = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'; //EntryPoint
-export const paymasterAddress = '0x6D0Bc38A66DCe1Eb51D0fb087abAD151Ac49cD2F'; //VerifyingPaymaster
+export const paymasterAddress = '0x2A8Fd15a36826809fD1b5d95DBaeb3a10B30E1fd'; //VerifyingPaymaster
 export const accountAddress = '0x0E1c853Cc60f5f1bB4D6e830C8257b75672919d1'; //MoonKeyGonosisAccountFactory
 export const safeSingletonAddress =
 	'0x5711Fd2d656942895763ac2FC5824607Ef6b5C92'; //MoonKeyPluginSafe

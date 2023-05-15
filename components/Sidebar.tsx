@@ -20,14 +20,14 @@ function Sidebar() {
 				className='flex items-center bg-none cursor-pointer'
 				onClick={() => router.push('/')}
 			>
-				<img src='/moon.svg' className='m-3 h-10 w-10' />
+				<img src='/moon.png' className='m-3 h-10 w-10' />
 				<p className='font-Kelly text-2xl'>MoonKey</p>
 			</div>
 			{/* Particle (ERC4337) account */}
 			<div className='flex flex-1 flex-col mt-2 items-center bg-gray-700'>
 				<div
 					className={`flex flex-row items-center ${
-						particle.auth.isLogin ? 'text-green-700' : 'text-red-700'
+						particle.auth.isLogin() ? 'text-green-700' : 'text-red-700'
 					} `}
 				>
 					{/* Change text color to green when connected to signer */}
@@ -35,7 +35,7 @@ function Sidebar() {
 					<p className='text-gray-300'>{newAccount}</p>
 				</div>
 				<div className='flex flex-row items-center justify-center'>
-					<p className='font-bold '>mumb:</p>
+					<p className='font-bold '>bsc:</p>
 					<p className='font-light '>
 						{newAddress?.substring(0, 6)}
 						{'...'}
