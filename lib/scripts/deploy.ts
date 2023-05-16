@@ -46,7 +46,7 @@ export async function deploy(
 	//]);
 	const counterfactualAddress = await accountFactory.callStatic.getAddress(
 		ownerAddress,
-		1234
+		12345
 	);
 
 	//console.log('safeSingletonAddress', await accountFactory.safeSingleton());
@@ -54,7 +54,7 @@ export async function deploy(
 		accountFactory.address,
 		accountFactory.interface.encodeFunctionData('createAccount', [
 			ownerAddress,
-			1234,
+			12345,
 		]),
 	]);
 	console.log('initCode', initCode);
@@ -73,7 +73,7 @@ export async function fillOp(
 	);
 	const op = {
 		sender: counterfactualAddress,
-		initCode,
+		initCode: initCode,
 		verificationGasLimit: 1000000,
 	};
 	const op2 = await fillUserOp(
@@ -100,7 +100,7 @@ export async function fillOpPaymaster(
 	);
 	const op = {
 		sender: counterfactualAddress,
-		initCode,
+		initCode: initCode,
 		verificationGasLimit: 1000000,
 		paymasterAndData: hexConcat([
 			paymasterAddress,

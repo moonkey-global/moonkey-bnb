@@ -86,18 +86,16 @@ export async function paymasterSigned(
 	op: UserOperation,
 	provider: ethers.providers.JsonRpcProvider
 ) {
-	const paymaster = new ethers.Contract(paymasterAddress, _abi, provider);
 	// Sign OffChain to verify as paymaster
-	const hash = await paymaster.callStatic.getHash(op, VALID_UNTIL, VALID_AFTER);
 
-	//const offchainSigner = new ethers.Wallet(
-	//	process.env.NEXT_PUBLIC_PAYMASTER_OWNER_PRIVATE_KEY!,
-	//	provider
-	//);
-	//const sig = await offchainSigner.signMessage(arrayify(hash));
-	const sig = await fetch('/api/paymaster', {
+	const sig: string = await fetch('/api/paymaster', {
 		method: 'POST',
-		body: JSON.stringify({ provider: provider, hash: hash }),
+		body: JSON.stringify({
+			paymasterAddress: paymasterAddress,
+			op: JSON.stringify(op),
+			until: VALID_UNTIL,
+			after: VALID_AFTER,
+		}),
 		cache: 'no-store',
 	}).then((res) => res.json());
 	console.log('Paymaster Sig: ', sig);

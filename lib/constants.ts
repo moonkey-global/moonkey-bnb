@@ -9,3 +9,6 @@ export const USDCAddress = '0xe11A86849d99F524cAC3E7A0Ec1241828e332C62';
 export const USDTAddress = '0xAcDe43b9E5f72a4F554D4346e69e8e7AC8F352f0';
 export const DAIAddress = '0xF14f9596430931E177469715c591513308244e8F';
 export const WETHAddress = '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa';
+export const paymasterDeployAddress =
+	'0xcA0987D90f298B0c2FDeD195228EE37Fe584a229';
+export const minimumGas = 5000000000000000; // 0.005

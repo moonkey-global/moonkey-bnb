@@ -28,6 +28,11 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import {
+	fillOpPaymasterDeploy,
+	paymasterFillOpDeploy,
+} from '@/lib/scripts/paymasterServer';
+import { minimumGas } from '@/lib/constants';
 type ProfileList = {
 	profile: string;
 	address: string;
@@ -72,7 +77,7 @@ function CreateAccount() {
 
 				const res = await fillOp(await signer.getAddress(), prov);
 				const smartAccountAddress = res.counterfactualAddress;
-				console.log('AA: ', smartAccountAddress);
+				// console.log('AA: ', smartAccountAddress);
 
 				changeAddress(smartAccountAddress);
 				setAccountsList((prevState) => [
@@ -92,7 +97,7 @@ function CreateAccount() {
 					return;
 				}
 				const balance = await prov.getBalance(smartAccountAddress);
-				if (balance.lte(parseEther('0.09'))) {
+				if (balance.lte(minimumGas)) {
 					toast.error(
 						`No paymaster found! And not enough balance on ${smartAccountAddress.substring(
 							0,
@@ -124,6 +129,81 @@ function CreateAccount() {
 				duration: 5000,
 			});
 			console.error(error);
+		}
+	};
+
+	const handleCreateAccountWithPaymaster = async () => {
+		const notification = toast.loading(`SigningIn...`, { duration: 2000 });
+		try {
+			if (!particle.auth.isLogin() || !provider) logIn!();
+
+			if (changeAddress && provider) {
+				const prov = provider;
+				// new ethers.providers.JsonRpcProvider(
+				// 	`https://bsc-testnet.nodereal.io/v1/${process.env.NEXT_PUBLIC_NODEREAL_PROVIDER}`
+				// );
+				const signer: ethers.providers.JsonRpcSigner = prov.getSigner();
+				console.log(await signer.getAddress());
+
+				const res = await fillOpPaymasterDeploy(
+					await signer.getAddress(),
+					prov
+				);
+				const smartAccountAddress = res.counterfactualAddress;
+
+				changeAddress(smartAccountAddress);
+				setAccountsList((prevState) => [
+					...prevState,
+					smartAccountAddress as string,
+				]);
+
+				if ((await prov.getCode(smartAccountAddress)).length > 2) {
+					toast.success(
+						`SmartAccount already exist at ${smartAccountAddress.substring(
+							0,
+							6
+						)}`,
+						{ id: notification, duration: 5000 }
+					);
+					router.push(`/moons/${smartAccountAddress}`);
+					return;
+				}
+				// const balance = res.balance;
+				// if (balance.lte(parseEther('0.009'))) {
+				// 	await handleCreateAccount();
+				// 	return;
+				// }
+				const signature = await signer.signMessage(res.message);
+				const op: UserOperation = { ...res.userOp, signature: signature };
+				// Wait for paymaster signing
+				const response = await paymasterFillOpDeploy(op, prov);
+				// Sign again after paymaster signing
+				const signature2 = await signer.signMessage(response.message);
+				const op2: UserOperation = {
+					...response.userOp,
+					signature: signature2,
+				};
+				await sendToBundler(op2, prov);
+				toast.success(
+					`Deployed smart account at ${smartAccountAddress.substring(0, 6)}`,
+					{ id: notification, duration: 5000 }
+				);
+
+				router.push(`/moons/${smartAccountAddress}`);
+				return;
+			}
+			// toast.error(`Whoops... Unexpected exit! Click-again`, {
+			// 	id: notification,
+			// 	duration: 2000,
+			// });
+		} catch (error) {
+			toast.error(`Whoops... Something went wrong! Check console`, {
+				id: notification,
+				duration: 5000,
+			});
+			console.error(error);
+			// If the error is low gas from paymaster (32505), try deploying with owners own fund
+			// await handleCreateAccount()
 		}
 	};
 
@@ -198,7 +278,7 @@ function CreateAccount() {
 						</div>
 					</div>
 					<DialogFooter>
-						<Button type='submit' onClick={handleCreateAccount}>
+						<Button type='submit' onClick={handleCreateAccountWithPaymaster}>
 							Save and Connect
 						</Button>
 					</DialogFooter>
