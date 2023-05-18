@@ -52,6 +52,7 @@ export default function Home() {
 				<div className='min-h-full flex items-center justify-center'>
 					<img src='/moon.png' className='m-4 h-20 w-20' />
 				</div>
+				
 				<div className='min-h-full flex flex-col items-center justify-center'>
 					<p className='font-Kelly text-3xl font-bold'>
 						Who&apos;s using MoonKey?

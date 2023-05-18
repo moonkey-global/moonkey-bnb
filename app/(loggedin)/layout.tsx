@@ -7,8 +7,8 @@ export default function RootLayout({
 }) {
 	return (
 		<main className='grid grid-cols-8'>
-			<Sidebar />
 			{children}
+			<Sidebar />
 		</main>
 	);
 }

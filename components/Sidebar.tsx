@@ -15,75 +15,71 @@ function Sidebar() {
 		useContext(ClientContext);
 	const router = useRouter();
 	return (
-		<div className='flex flex-col col-span-2 items-center px-4 md:items-start text-gray-300 bg-gray-800 border-gray-800'>
-			<div
-				className='flex items-center bg-none cursor-pointer'
-				onClick={() => router.push('/')}
-			>
-				<img src='/moon.png' className='m-3 h-10 w-10' />
-				<p className='font-Kelly text-2xl'>MoonKey</p>
-			</div>
-			{/* Particle (ERC4337) account */}
-			<div className='flex flex-1 flex-col mt-2 items-center bg-gray-700'>
+		<div className='flex flex-col col-span-2 items-center px-4 md:items-start'>
+			<div className='min-h-full flex items-center overflow-x-hidden'>
 				<div
-					className={`flex flex-row items-center ${
-						particle.auth.isLogin() ? 'text-green-700' : 'text-red-700'
-					} `}
+					className='relative text-center text-yellow-900 font-bold '
+					onClick={() => router.push('/')}
 				>
-					{/* Change text color to green when connected to signer */}
-					<MdVpnKey size={25} />
-					<p className='text-gray-300'>{newAccount}</p>
+					<img
+						src='/moons_fixed-01.png'
+						className='overflow-x-hidden'
+						width='80'
+						height='80'
+					/>
+					<div className='absolute top-[50%] left-[63%] translate-x-[-50%] translate-y-[-50%]'>
+						BNB
+					</div>
 				</div>
-				<div className='flex flex-row items-center justify-center'>
-					<p className='font-bold '>bsc:</p>
-					<p className='font-light '>
-						{newAddress?.substring(0, 6)}
-						{'...'}
-						{newAddress?.substring(newAddress.length - 4)}
-					</p>
-					<button
-						className='cursor-pointer hover:bg-gray-600 hover:text-white'
-						onClick={() => navigator.clipboard.writeText(newAddress!)}
-					>
-						<BiCopy size={10} />
-					</button>
+				<div className='relative text-center text-white font-bold overflow-x-hidden scrollbar-hide whitespace-nowrap'>
+					<img
+						src='/key_fixed-01.png'
+						className='overflow-hidden translate-y-1'
+						width='160'
+						height='80'
+					/>
+
+					<div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-40%]'>
+						{newAccount}
+					</div>
 				</div>
 			</div>
+
 			{/* Divider line */}
 			<div className='inset-0 flex items-center place-content-center'>
-				<div className='w-3/4 border-t border-gray-300' />
+				<div className='w-3/4 border-t border-gray-500' />
 			</div>
 			{/* Assets */}
 			<Link
 				href={`/asset/${newAddress}`}
-				className='no-underline text-gray-300'
+				className='no-underline text-gray-500'
 			>
 				<SidebarRow Icon={GiTwoCoins} title='Assets' />
 			</Link>
 			{/* Transactions */}
 			<Link
 				href={`/transfers/${newAddress}`}
-				className='no-underline text-gray-300'
+				className='no-underline text-gray-500'
 			>
-				<SidebarRow Icon={BiTransferAlt} title='Transactions' />
+				<SidebarRow Icon={BiTransferAlt} title='Transfers' />
 			</Link>
 			{/* Mods */}
-			<Link href={`/mods/${newAddress}`} className='no-underline text-gray-300'>
+			<Link href={`/mods/${newAddress}`} className='no-underline text-gray-500'>
 				<SidebarRow Icon={AiFillTool} title='Mods' />
 			</Link>
 			{/* Moons */}
 			<Link
 				href={`/moons/${newAddress}`}
-				className='no-underline text-gray-300'
+				className='no-underline text-gray-500'
 			>
 				<SidebarRow Icon={TbPlanet} title='Moons' />
 			</Link>
 			{/* Divider line */}
 			<div className='inset-0 flex items-center place-content-center'>
-				<div className='w-3/4 border-t border-gray-300' />
+				<div className='w-3/4 border-t border-gray-500' />
 			</div>
-			<Link href={`/buy/${newAddress}`} className='no-underline text-gray-300'>
-				<SidebarRow Icon={BiDollarCircle} title='Onramp' />
+			<Link href={`/buy/${newAddress}`} className='no-underline text-gray-500'>
+				<SidebarRow Icon={BiDollarCircle} title='Buy' />
 			</Link>
 		</div>
 	);

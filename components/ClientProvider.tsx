@@ -7,7 +7,7 @@ import { particleValue } from '@/lib/particleAuth';
 import { ethers } from 'ethers';
 
 export const ClientContext = React.createContext<ClientProps>({
-	logIn: function (): {} {
+	logIn: function (): Promise<void> {
 		throw new Error('Function not implemented.');
 	},
 	logOut: function (): {} {
@@ -26,7 +26,7 @@ export const ClientContext = React.createContext<ClientProps>({
 export interface ClientProps {
 	particle?: any;
 	provider?: any;
-	logIn: () => {};
+	logIn: () => Promise<void>;
 	logOut: () => {};
 	newAccount: string;
 	newAddress: string;

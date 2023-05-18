@@ -61,6 +61,10 @@ function CreateAccount() {
 	};
 
 	const router = useRouter();
+	const handleLogin = async () => {
+		if (!particle.auth.isLogin() || !provider) await logIn!();
+		
+	};
 
 	const handleCreateAccount = async () => {
 		const notification = toast.loading(`SigningIn...`, { duration: 2000 });
@@ -135,7 +139,7 @@ function CreateAccount() {
 	const handleCreateAccountWithPaymaster = async () => {
 		const notification = toast.loading(`SigningIn...`, { duration: 2000 });
 		try {
-			if (!particle.auth.isLogin() || !provider) logIn!();
+			await handleLogin();
 
 			if (changeAddress && provider) {
 				const prov = provider;
