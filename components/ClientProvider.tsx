@@ -21,6 +21,9 @@ export const ClientContext = React.createContext<ClientProps>({
 	changeAddress: function (newAddress: string): void {
 		throw new Error('Function not implemented.');
 	},
+	latestProvider: async function (): Promise<void> {
+		throw new Error('Function not implemented.');
+	},
 });
 
 export interface ClientProps {
@@ -33,6 +36,20 @@ export interface ClientProps {
 	changeAccount: (newAccount: string) => void;
 	changeAddress: (newAddress: string) => void;
 	account?: string;
+	latestProvider: () => {};
+}
+
+function useExtendedState<T>(initialState: T) {
+	const [state, setState] = useState<T>(initialState);
+	const getLatestState = () => {
+		return new Promise<T>((resolve, reject) => {
+			setState((s) => {
+				resolve(s);
+				return s;
+			});
+		});
+	};
+	return [state, setState, getLatestState] as const;
 }
 
 export default function RootLayout({
@@ -50,9 +67,8 @@ export default function RootLayout({
 		setAccount(undefined);
 	};
 
-	const [provider, setProvider] = useState<ethers.providers.Provider | null>(
-		null
-	);
+	const [provider, setProvider, getLatestState] =
+		useExtendedState<ethers.providers.Provider | null>(null);
 	const [clientProps, setClientProps] = useState<ClientProps>();
 	const [newAccount, setNewAccount] = useState('Account-1');
 	const [newAddress, setNewAddress] = useState(
@@ -72,6 +88,7 @@ export default function RootLayout({
 		setClientProps({
 			particle: particle,
 			provider: provider,
+			latestProvider: getLatestState,
 			logIn: login,
 			logOut: logout,
 			newAccount: newAccount,
@@ -93,7 +110,13 @@ export default function RootLayout({
 				console.log('Error: ', error.message);
 			});
 		// particle.evm.personalSign(`0x${Buffer.from(msg).toString('hex')}`)
-
+		// try {
+		// 	const lin = await particle.auth.login();
+		// 	console.log('connect success', lin.wallets);
+		// 	setAccount(particle.auth.wallet()?.public_address);
+		// } catch (error) {
+		// 	console.log('Error: ', error);
+		// }
 		// const prov = new ethers.providers.JsonRpcProvider(
 		// 	`https://bsc-testnet.nodereal.io/v1/${process.env.NEXT_PUBLIC_NODEREAL_PROVIDER}`
 		// );

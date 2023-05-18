@@ -3,12 +3,9 @@ import { ClientContext } from '@/components/ClientProvider';
 import { UserOperation } from '@/lib/scripts/UserOperation';
 import { fillOp, sendToBundler } from '@/lib/scripts/deploy';
 import { ethers } from 'ethers';
-import { parseEther } from 'ethers/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { AiFillCloseSquare } from 'react-icons/ai';
-import { BiAddToQueue, BiImport } from 'react-icons/bi';
 import { Button } from '@/components/ui/button';
 import {
 	Card,
@@ -40,18 +37,18 @@ type ProfileList = {
 function CreateAccount() {
 	const {
 		logIn,
-		logOut,
-		account,
 		particle,
 		changeAddress,
 		provider,
 		changeAccount,
 		newAccount,
+		latestProvider,
 	} = useContext(ClientContext);
 
 	const [profileList, setProfileList] = useState([] as Array<ProfileList>);
 	const [accountsList, setAccountsList] = useState([] as Array<string>);
 	const [checked, setChecked] = useState(false);
+
 	const handleChecked = () => {
 		setChecked(!checked);
 	};
@@ -63,7 +60,6 @@ function CreateAccount() {
 	const router = useRouter();
 	const handleLogin = async () => {
 		if (!particle.auth.isLogin() || !provider) await logIn!();
-		
 	};
 
 	const handleCreateAccount = async () => {
@@ -140,9 +136,12 @@ function CreateAccount() {
 		const notification = toast.loading(`SigningIn...`, { duration: 2000 });
 		try {
 			await handleLogin();
+			console.log('Logged in');
 
-			if (changeAddress && provider) {
-				const prov = provider;
+			if (changeAddress) {
+				const prov =
+					(await latestProvider()) as ethers.providers.JsonRpcProvider;
+
 				// new ethers.providers.JsonRpcProvider(
 				// 	`https://bsc-testnet.nodereal.io/v1/${process.env.NEXT_PUBLIC_NODEREAL_PROVIDER}`
 				// );
