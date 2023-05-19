@@ -7,34 +7,53 @@ export default function Page({ params }: { params: any }) {
 			<div className='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 px-1 md:px-3'>
 				<div className='flex flex-col items-center'>
 					<img
-						src='/AlienWorlds.png'
+						src='/alien-worlds.webp'
 						alt='AlienWorlds logo'
 						width='90'
 						height='90'
+						className='rounded-md'
 					/>
 					<p>Alien Worlds</p>
 				</div>
 				<div className='flex flex-col items-center'>
-					<img src='/Faraland.png' alt='Faraland logo' width='90' height='90' />
+					<img
+						src='/faraland.jpeg'
+						alt='Faraland logo'
+						width='90'
+						height='90'
+						className='rounded-md'
+					/>
 					<p>Faraland</p>
 				</div>
 				<div className='flex flex-col items-center'>
 					<img
-						src='/CrazyDefense.png'
+						src='/crazydefenseheros.jpeg'
 						alt='CrazyDefense logo'
 						width='90'
 						height='90'
+						className='rounded-md'
 					/>
 					<p>Crazy Defense</p>
 				</div>
 				<div className='flex flex-col items-center'>
 					<img
-						src='/DrunkRobots.png'
+						src='/drunkrobots.png'
 						alt='DrunkRobots logo'
 						width='90'
 						height='90'
+						className='rounded-md'
 					/>
 					<p>Drunk Robots</p>
+				</div>
+				<div className='flex flex-col items-center'>
+					<img
+						src='/spacesix.jpeg'
+						alt='SpaceSix logo'
+						width='90'
+						height='90'
+						className='rounded-md'
+					/>
+					<p>Space six</p>
 				</div>
 			</div>
 		</div>

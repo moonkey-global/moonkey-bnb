@@ -15,8 +15,8 @@ function Sidebar() {
 		useContext(ClientContext);
 	const router = useRouter();
 	return (
-		<div className='flex flex-col col-span-2 items-center px-4 md:items-start'>
-			<div className='min-h-full flex items-center overflow-x-hidden'>
+		<div className='absolute top-0 right-0 flex flex-col items-center px-4 gap-2 md:items-end'>
+			<div className='min-h-full flex items-center overflow-x-hidden mb-6'>
 				<div
 					className='relative text-center text-yellow-900 font-bold '
 					onClick={() => router.push('/')}
