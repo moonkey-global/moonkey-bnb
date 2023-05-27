@@ -9,7 +9,7 @@ export default function Page({ params }: { params: any }) {
 			<Input
 				id='searchbar'
 				defaultValue='Search...'
-				className='col-span-2 h-10 items-center justify-center'
+				className='col-span-2 max-w-md h-10 items-center justify-center ml-2'
 			/>
 			<div className='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 px-1 md:px-3'>
 				<div className='flex flex-col items-center'>
@@ -44,7 +44,7 @@ export default function Page({ params }: { params: any }) {
 				</div>
 				<div className='flex flex-col items-center'>
 					<img
-						src='/drunkrobots.png'
+						src='/drunkrobots.webp'
 						alt='DrunkRobots logo'
 						width='90'
 						height='90'
