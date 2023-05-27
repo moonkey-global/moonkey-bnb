@@ -2,15 +2,49 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog';
+import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
-import { ArrowDownLeft, ArrowUpRight, Plus } from 'lucide-react';
+import { ArrowDownLeft, ArrowUpRight, Copy, Plus } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Page() {
+	const Recieve = () => {
+		return (
+			<Dialog>
+				<DialogTrigger asChild>
+					<Button variant='ghost'>
+						<ArrowDownLeft />
+						Recieve
+					</Button>
+				</DialogTrigger>
+				<DialogContent className='sm:max-w-[425px]'>
+					<DialogHeader>
+						<DialogTitle>Recieve tokens</DialogTitle>
+						<DialogDescription>Smart account address</DialogDescription>
+					</DialogHeader>
+					<div className='grid gap-4 py-4'>
+						<p className='text-sm font-medium leading-none'>QR Code</p>
+						<Image src='/qrcode.png' alt='QR Code' width={100} height={100} />
+						<p className='flex text-sm text-muted-foreground'>
+							Copy address
+							<Copy className='ml-1 h-3 w-3' />
+						</p>
+					</div>
+				</DialogContent>
+			</Dialog>
+		);
+	};
 	return (
 		<div className='flex flex-col items-center justify-center col-span-6 mt-10'>
 			<div className='w-[800px]'>
@@ -39,8 +73,7 @@ export default function Page() {
 							Send
 						</div>
 						<div className='flex'>
-							<ArrowDownLeft />
-							Recieve
+							<Recieve />
 						</div>
 					</div>
 					<div className='flex items-center space-x-4 rounded-md border p-4'>
@@ -54,8 +87,7 @@ export default function Page() {
 							Send
 						</div>
 						<div className='flex'>
-							<ArrowDownLeft />
-							Recieve
+							<Recieve />
 						</div>
 					</div>
 					<div className='flex items-center space-x-4 rounded-md border p-4'>
@@ -74,8 +106,7 @@ export default function Page() {
 							Send
 						</div>
 						<div className='flex'>
-							<ArrowDownLeft />
-							Recieve
+							<Recieve />
 						</div>
 					</div>
 					<div className='flex items-center space-x-4 rounded-md border p-4'>
@@ -89,8 +120,7 @@ export default function Page() {
 							Send
 						</div>
 						<div className='flex'>
-							<ArrowDownLeft />
-							Recieve
+							<Recieve />
 						</div>
 					</div>
 					<div className='flex relative items-center justify-center space-x-4 p-4'>
