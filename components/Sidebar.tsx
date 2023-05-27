@@ -61,7 +61,7 @@ function Sidebar() {
 				href={`/transfers/${newAddress}`}
 				className='no-underline text-gray-500'
 			>
-				<SidebarRow Icon={BiTransferAlt} title='Transfers' />
+				<SidebarRow Icon={BiTransferAlt} title='History' />
 			</Link>
 			{/* Mods */}
 			<Link href={`/mods/${newAddress}`} className='no-underline text-gray-500'>

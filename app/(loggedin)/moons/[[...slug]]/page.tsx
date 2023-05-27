@@ -1,9 +1,16 @@
+import { Input } from '@/components/ui/input';
+
 export default function Page({ params }: { params: any }) {
 	let address = '';
 	if (params.slug) address = params.slug[0];
 	// push Moon URL from here
 	return (
-		<div className='flex flex-col col-span-6'>
+		<div className='flex flex-col col-span-6 mt-10'>
+			<Input
+				id='searchbar'
+				defaultValue='Search...'
+				className='col-span-2 h-10 items-center justify-center'
+			/>
 			<div className='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 px-1 md:px-3'>
 				<div className='flex flex-col items-center'>
 					<img

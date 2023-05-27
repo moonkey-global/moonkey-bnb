@@ -17,6 +17,7 @@ import {
 import { Label } from '@/components/ui/label';
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogFooter,
@@ -30,6 +31,7 @@ import {
 	paymasterFillOpDeploy,
 } from '@/lib/scripts/paymasterServer';
 import { minimumGas } from '@/lib/constants';
+import { Copy, Star } from 'lucide-react';
 type ProfileList = {
 	profile: string;
 	address: string;
@@ -48,6 +50,7 @@ function CreateAccount() {
 	const [profileList, setProfileList] = useState([] as Array<ProfileList>);
 	const [accountsList, setAccountsList] = useState([] as Array<string>);
 	const [checked, setChecked] = useState(false);
+	const starsArray = [1, 2, 3, 4];
 
 	const handleChecked = () => {
 		setChecked(!checked);
@@ -281,9 +284,11 @@ function CreateAccount() {
 						</div>
 					</div>
 					<DialogFooter>
-						<Button type='submit' onClick={handleCreateAccountWithPaymaster}>
-							Save and Connect
-						</Button>
+						<DialogClose asChild>
+							<Button type='submit' onClick={handleCreateAccountWithPaymaster}>
+								Save and Connect
+							</Button>
+						</DialogClose>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
@@ -339,13 +344,19 @@ function CreateAccount() {
 										{account.substring(0, 6)}
 										{'...'}
 										{account.substring(account.length - 4)}
+										<Copy className='ml-1 h-3 w-3' />
 									</Button>
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
 								<div className='grid w-full items-center gap-4'>
 									<div className='flex flex-col space-y-1.5'>
-										<Label htmlFor='star'>Stars here</Label>
+										<div className='flex'>
+											<Star color='yellow' fill='yellow' />
+											{starsArray.map((stars, index) => (
+												<Star color='yellow' key={index} />
+											))}
+										</div>
 										<Button
 											variant='secondary'
 											onClick={async () => {
