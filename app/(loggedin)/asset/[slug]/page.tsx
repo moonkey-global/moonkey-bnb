@@ -77,9 +77,14 @@ export default function Page() {
 						</div>
 					</div>
 					<div className='flex items-center space-x-4 rounded-md border p-4'>
-						<Image src='/bnb-logo.svg' alt='BNB Logo' width={24} height={24} />
+						<Image
+							src='/matic-logo.svg'
+							alt='Matic Logo'
+							width={24}
+							height={24}
+						/>
 						<div className='flex-1 space-y-1'>
-							<p className='text-sm font-medium leading-none'>BNB</p>
+							<p className='text-sm font-medium leading-none'>MATIC</p>
 							<p className='text-sm text-muted-foreground'>0.0</p>
 						</div>
 						<div className='flex'>
@@ -92,13 +97,13 @@ export default function Page() {
 					</div>
 					<div className='flex items-center space-x-4 rounded-md border p-4'>
 						<Image
-							src='/busd-logo.svg'
-							alt='BUSD Logo'
+							src='/usdc-logo.svg'
+							alt='USDC Logo'
 							width={24}
 							height={24}
 						/>
 						<div className='flex-1 space-y-1'>
-							<p className='text-sm font-medium leading-none'>BUSD</p>
+							<p className='text-sm font-medium leading-none'>USDC</p>
 							<p className='text-sm text-muted-foreground'>0.0</p>
 						</div>
 						<div className='flex'>

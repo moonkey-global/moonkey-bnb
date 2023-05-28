@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 	if (!body) return new Response('Error, no body', { status: 500 });
 
 	const provider = new ethers.providers.JsonRpcProvider(
-		`https://bsc-testnet.nodereal.io/v1/${process.env.NEXT_PUBLIC_NODEREAL_PROVIDER}`
+		`https://polygon-mumbai.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_PROVIDER}`
 	);
 	const offchainSigner = new ethers.Wallet(
 		process.env.PAYMASTER_OWNER_PRIVATE_KEY!,

@@ -28,7 +28,7 @@ function Sidebar() {
 						height='80'
 					/>
 					<div className='absolute top-[50%] left-[63%] translate-x-[-50%] translate-y-[-50%]'>
-						BNB
+						Poly
 					</div>
 				</div>
 				<div className='relative text-center text-white font-bold overflow-x-hidden scrollbar-hide whitespace-nowrap'>
