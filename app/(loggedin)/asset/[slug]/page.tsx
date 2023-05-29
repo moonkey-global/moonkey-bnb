@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,7 +9,9 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
+	DialogClose
 } from '@/components/ui/dialog';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import {
 	Popover,
 	PopoverContent,
@@ -16,9 +19,15 @@ import {
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
 import { ArrowDownLeft, ArrowUpRight, Copy, Plus } from 'lucide-react';
+import { useState } from 'react';
 import Image from 'next/image';
+import PaymentRequest from '@/components/RequestNetwork';
 
 export default function Page() {
+	const [payerAddress, setPayerAddress] = useState('');
+	const [requestAmount, setRequestAmount] = useState('');
+	const [paymentLink, setPaymentLink] = useState('');
+
 	const Recieve = () => {
 		return (
 			<Dialog>
@@ -44,6 +53,59 @@ export default function Page() {
 				</DialogContent>
 			</Dialog>
 		);
+	};
+	const handleCreateRequest = async () => {
+		setPayerAddress('a');
+		setRequestAmount('b');
+		const requestId = await PaymentRequest('USDT', payerAddress, requestAmount);
+		setPaymentLink(`https://pay.request.network/${requestId}`);
+	};
+	const Request = () => {
+		return (
+			<Dialog>
+				<DialogTrigger asChild>
+					<Button variant='ghost'>
+						<ArrowDownLeft />
+						Create a request
+					</Button>
+				</DialogTrigger>
+				<DialogContent className='sm:max-w-[425px]'>
+					<DialogHeader>
+						<DialogTitle>Payment request</DialogTitle>
+						<DialogDescription>Enter the details</DialogDescription>
+					</DialogHeader>
+					<div className='grid gap-2'>
+						<div className='grid grid-cols-3 items-center gap-4'>
+							<Label htmlFor='payerAddress'>Payer Address</Label>
+							<Input
+								defaultValue=''
+								placeholder='0x...'
+								required={true}
+								className='col-span-2 h-8'
+							/>
+						</div>
+						<div className='grid grid-cols-3 items-center gap-4'>
+							<Label htmlFor='amount'>Amount (in wei)</Label>
+							<Input
+								defaultValue=''
+								placeholder=''
+								required={true}
+								className='col-span-2 h-8'
+							/>
+						</div>
+						<Button type='button' onClick={handleCreateRequest}>
+							Create a request
+						</Button>
+						<Label htmlFor='paymentLink'>{paymentLink}</Label>
+					</div>
+					{/* <DialogClose asChild>
+						<button className="IconButton" aria-label="Close">
+							<Cross2Icon />
+						</button>
+        			</DialogClose> */}
+				</DialogContent>
+			</Dialog>
+		)	
 	};
 	return (
 		<div className='flex flex-col items-center justify-center col-span-6 mt-10'>
@@ -74,6 +136,9 @@ export default function Page() {
 						</div>
 						<div className='flex'>
 							<Recieve />
+						</div>
+						<div className='flex'>
+							<Request />
 						</div>
 					</div>
 					<div className='flex items-center space-x-4 rounded-md border p-4'>

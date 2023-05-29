@@ -1,60 +1,68 @@
-export function сreateTaxRequest() {}
-// import { EthereumPrivateKeySignatureProvider } from '@requestnetwork/epk-signature';
-// import * as RequestNetwork from '@requestnetwork/request-client.js';
+import { EthereumPrivateKeySignatureProvider } from '@requestnetwork/epk-signature';
+import * as RequestNetwork from '@requestnetwork/request-client.js';
+import { RequestLogicTypes } from '@requestnetwork/types';
+import { useContext } from 'react';
+import { ClientContext } from '@/components/ClientProvider';
 
-// export async function сreateTaxRequest() {
-//     // payee information
-//     const payeeSignatureInfo = {
-//         method: RequestNetwork.Types.Signature.METHOD.ECDSA,
-//         privateKey: process.env.TAX_SERVICE_PRIVATE_KEY,
-//     };
-//     const payeeIdentity = {
-//         type: RequestNetwork.Types.Identity.TYPE.ETHEREUM_ADDRESS,
-//         value: TAX_SERVICE_ADDRESS,
-//     };
+export async function сreatePaymentRequest(
+        currency: string | RequestLogicTypes.ICurrency, 
+        payeeAddress: string, payerAddress: string, 
+        requestAmount: RequestLogicTypes.Amount
+    ){
+    
+    // payee information
+    const payeeSignatureInfo = {
+        method: RequestNetwork.Types.Signature.METHOD.ECDSA,
+        privateKey: process.env.NEXT_PUBLIC_REQUEST_PRIVATE_KEY!,
+    };
 
-//     // payer information
-//     const payerIdentity = {
-//         type: RequestNetwork.Types.Identity.TYPE.ETHEREUM_ADDRESS,
-//         value: PAYER_ADDRESS,
-//     };
+    const payeeIdentity = {
+        type: RequestNetwork.Types.Identity.TYPE.ETHEREUM_SMART_CONTRACT,
+        value: payeeAddress,
+    };
 
-//     // Signature providers
-//     const signatureProvider = new EthereumPrivateKeySignatureProvider(payeeSignatureInfo);
+    // payer information
+    const payerIdentity = {
+        type: RequestNetwork.Types.Identity.TYPE.ETHEREUM_ADDRESS,
+        value: payerAddress, 
+    };
 
-//     const requestInfo: RequestNetwork.Types.IRequestInfo = {
-//     currency: 'USDT',
-//     expectedAmount: TAX_AMOUNT,
-//     payee: payeeIdentity,
-//     payer: payerIdentity,
-//     };
+    // Signature providers
+    const signatureProvider = new EthereumPrivateKeySignatureProvider(payeeSignatureInfo);
 
-//     const paymentNetwork: RequestNetwork.Types.Payment.PaymentNetworkCreateParameters = {
-//         id: RequestNetwork.Types.Extension.PAYMENT_NETWORK_ID.ERC20_ADDRESS_BASED,
-//         parameters: {
-//           paymentAddress: TAX_SERVICE_ADDRESS,
-//         },
-//     };
+    const requestInfo: RequestNetwork.Types.IRequestInfo = {
+        currency: currency,
+        expectedAmount: requestAmount,
+        payee: payeeIdentity,
+        payer: payerIdentity,
+    };
 
-//     const requestNetwork = new RequestNetwork.RequestNetwork({
-//         nodeConnectionConfig: { baseURL: "https://xdai.gateway.request.network/" },
-//         signatureProvider,
-//         // useMockStorage: true,
-//       });
+    const paymentNetwork: RequestNetwork.Types.Payment.PaymentNetworkCreateParameters = {
+        id: RequestNetwork.Types.Extension.PAYMENT_NETWORK_ID.ERC20_ADDRESS_BASED,
+        parameters: {
+          paymentAddress: payeeAddress,
+        },
+    };
 
-//       const createParams = {
-//         paymentNetwork,
-//         requestInfo,
-//         signer: payeeIdentity,
-//       };
-//     let requestId: string;
+    const requestNetwork = new RequestNetwork.RequestNetwork({
+        nodeConnectionConfig: { baseURL: "https://xdai.gateway.request.network/" },
+        signatureProvider,
+        // useMockStorage: true,
+      });
 
-//     const request = await requestNetwork.createRequest(createParams);
-//     const confirmedRequest = await request.waitForConfirmation();
-//     console.log('request id: ', confirmedRequest.requestId);
+      const createParams = {
+        paymentNetwork,
+        requestInfo,
+        signer: payeeIdentity,
+      };
+    let requestId: string;
 
-//     return confirmedRequest.requestId;
-// }
+    const request = await requestNetwork.createRequest(createParams);
+    const confirmedRequest = await request.waitForConfirmation();
+    console.log('request id: ', confirmedRequest.requestId);
 
-// // payment link to implement on the frontend
-// //  https://pay.request.network/${requestId}
+    return confirmedRequest.requestId;
+}
+
+// payment link to implement on the frontend
+//  https://pay.request.network/${requestId}
