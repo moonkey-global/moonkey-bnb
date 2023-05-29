@@ -17,8 +17,11 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { ArrowDownLeft, ArrowUpRight, Copy, Plus } from 'lucide-react';
 import Image from 'next/image';
+import Asset, { ClipboardAddress } from './Asset';
 
-export default function Page() {
+export default function Page({ params }: { params: { slug: string } }) {
+	let address = '';
+	if (params.slug) address = params.slug[0];
 	const Recieve = () => {
 		return (
 			<Dialog>
@@ -33,13 +36,12 @@ export default function Page() {
 						<DialogTitle>Recieve tokens</DialogTitle>
 						<DialogDescription>Smart account address</DialogDescription>
 					</DialogHeader>
-					<div className='grid gap-4 py-4'>
-						<p className='text-sm font-medium leading-none'>QR Code</p>
-						<Image src='/qrcode.png' alt='QR Code' width={100} height={100} />
-						<p className='flex text-sm text-muted-foreground'>
-							Copy address
-							<Copy className='ml-1 h-3 w-3' />
-						</p>
+					<div className='flex items-center justify-center'>
+						<div className='grid gap-4 py-4'>
+							<p className='text-sm font-medium leading-none'>QR Code</p>
+							<Image src='/qrcode.png' alt='QR Code' width={100} height={100} />
+							<ClipboardAddress />
+						</div>
 					</div>
 				</DialogContent>
 			</Dialog>
@@ -69,8 +71,7 @@ export default function Page() {
 							<p className='text-sm text-muted-foreground'>0.0</p>
 						</div>
 						<div className='flex'>
-							<ArrowUpRight />
-							Send
+							<Asset tokenSymbol={'DAI'} />
 						</div>
 						<div className='flex'>
 							<Recieve />
@@ -88,8 +89,7 @@ export default function Page() {
 							<p className='text-sm text-muted-foreground'>0.0</p>
 						</div>
 						<div className='flex'>
-							<ArrowUpRight />
-							Send
+							<Asset tokenSymbol={'MATIC'} />
 						</div>
 						<div className='flex'>
 							<Recieve />
@@ -107,8 +107,7 @@ export default function Page() {
 							<p className='text-sm text-muted-foreground'>0.0</p>
 						</div>
 						<div className='flex'>
-							<ArrowUpRight />
-							Send
+							<Asset tokenSymbol={'USDC'} />
 						</div>
 						<div className='flex'>
 							<Recieve />
@@ -121,8 +120,7 @@ export default function Page() {
 							<p className='text-sm text-muted-foreground'>0.0</p>
 						</div>
 						<div className='flex'>
-							<ArrowUpRight />
-							Send
+							<Asset tokenSymbol={'ETH'} />
 						</div>
 						<div className='flex'>
 							<Recieve />

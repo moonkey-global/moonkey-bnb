@@ -24,7 +24,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Alien Worlds</p>
+				<p className='text-sm font-medium leading-none'>Alien Worlds</p>
 			</div>
 			<div
 				className='flex flex-col items-center cursor-pointer'
@@ -39,7 +39,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Faraland</p>
+				<p className='text-sm font-medium leading-none'>Faraland</p>
 			</div>
 			<div
 				className='flex flex-col items-center cursor-pointer'
@@ -54,7 +54,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Crazy Defense</p>
+				<p className='text-sm font-medium leading-none'>Crazy Defense</p>
 			</div>
 			<div
 				className='flex flex-col items-center cursor-pointer'
@@ -69,7 +69,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Drunk Robots</p>
+				<p className='text-sm font-medium leading-none'>Drunk Robots</p>
 			</div>
 			<div
 				className='flex flex-col items-center cursor-pointer'
@@ -84,7 +84,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Space six</p>
+				<p className='text-sm font-medium leading-none'>Space six</p>
 			</div>
 			<div
 				className='flex flex-col items-center cursor-pointer'
@@ -99,7 +99,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Azuro betting</p>
+				<p className='text-sm font-medium leading-none'>Azuro betting</p>
 			</div>
 			<div
 				className='flex flex-col items-center cursor-pointer'
@@ -114,7 +114,7 @@ export default function Moon() {
 					height='90'
 					className='rounded-md'
 				/>
-				<p className='text-xl font-medium leading-none'>Request Payment</p>
+				<p className='text-sm font-medium leading-none'>Request Payment</p>
 			</div>
 		</div>
 	);
