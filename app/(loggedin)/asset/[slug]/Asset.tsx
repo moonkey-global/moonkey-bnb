@@ -20,7 +20,7 @@ import { transfer } from '@/lib/scripts/transfer';
 import { UserOperation } from '@/lib/scripts/UserOperation';
 import { ethers } from 'ethers';
 import { parseEther } from 'ethers/lib/utils';
-import { ArrowUpRight, Copy } from 'lucide-react';
+import { ArrowDownLeft, ArrowUpRight, Copy } from 'lucide-react';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -36,7 +36,77 @@ export function ClipboardAddress() {
 		</div>
 	);
 }
-
+export const Receive = ({ address }: { address: string }) => {
+	const [payerAddress, setPayerAddress] = useState('');
+	const [requestAmount, setRequestAmount] = useState('');
+	const [paymentLink, setPaymentLink] = useState('');
+	const [isRequesting, setIsRequesting] = useState(false);
+	const handleCreateRequest = async () => {
+		setPayerAddress('a');
+		setRequestAmount('b');
+		const requestId = ''; //await PaymentRequest('USDT', payerAddress, requestAmount);
+		setPaymentLink(`https://pay.request.network/${requestId}`);
+		setIsRequesting(true);
+		setTimeout(function () {
+			setIsRequesting(false);
+		}, 10000);
+	};
+	return (
+		<Dialog>
+			<DialogTrigger asChild>
+				<Button variant='ghost'>
+					<ArrowDownLeft />
+					Receive
+				</Button>
+			</DialogTrigger>
+			{isRequesting ? (
+				<DialogContent className='sm:max-w-[425px]'>
+					<DialogHeader>
+						<DialogTitle>Payment request</DialogTitle>
+						<DialogDescription>Enter the details</DialogDescription>
+					</DialogHeader>
+					<div className='grid gap-2'>
+						<div className='grid grid-cols-3 items-center gap-4'>
+							<Label htmlFor='payerAddress'>Payer Address</Label>
+							<Input
+								defaultValue=''
+								placeholder='0x...'
+								required={true}
+								className='col-span-2 h-8'
+							/>
+						</div>
+						<div className='grid grid-cols-3 items-center gap-4'>
+							<Label htmlFor='amount'>Amount (in wei)</Label>
+							<Input
+								defaultValue=''
+								placeholder=''
+								required={true}
+								className='col-span-2 h-8'
+							/>
+						</div>
+						<Button type='button' onClick={handleCreateRequest}>
+							Create a request
+						</Button>
+					</div>
+				</DialogContent>
+			) : (
+				<DialogContent className='sm:max-w-[425px]'>
+					<DialogHeader>
+						<DialogTitle>Recieve tokens</DialogTitle>
+						<DialogDescription>Smart account address</DialogDescription>
+					</DialogHeader>
+					<div className='flex items-center justify-center'>
+						<div className='grid gap-4 py-4'>
+							<p className='text-sm font-medium leading-none'>QR Code</p>
+							<img src='/qrcode.png' alt='QR Code' width={100} height={100} />
+							<ClipboardAddress />
+						</div>
+					</div>
+				</DialogContent>
+			)}
+		</Dialog>
+	);
+};
 function Asset(props: { tokenSymbol: string }) {
 	const tokenSymbol = props.tokenSymbol;
 	const {
@@ -49,6 +119,7 @@ function Asset(props: { tokenSymbol: string }) {
 		latestProvider,
 		newAddress,
 	} = useContext(ClientContext);
+
 	const [amount, setAmount] = useState('1');
 	const [receiverAddress, setReceiverAddress] = useState(
 		'0x0000000000000000000000000000000000000000'
@@ -59,6 +130,7 @@ function Asset(props: { tokenSymbol: string }) {
 	const amountChange = (event: { target: { value: string } }) => {
 		setAmount(event.target.value);
 	};
+
 	const sendTransaction = async (
 		to: string,
 		amount: number,

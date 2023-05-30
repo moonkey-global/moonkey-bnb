@@ -361,7 +361,7 @@ function CreateAccount() {
 											variant='secondary'
 											onClick={async () => {
 												// logOut!();
-												await handleCreateAccount();
+												await handleCreateAccountWithPaymaster();
 												console.log('Pushed to moons', account);
 												router.push(`/moons/${account}`);
 											}}
