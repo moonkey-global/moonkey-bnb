@@ -17,7 +17,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { ArrowDownLeft, ArrowUpRight, Copy, Plus } from 'lucide-react';
 import Image from 'next/image';
-import Asset, { ClipboardAddress, Receive } from './Asset';
+import Asset, { Balance, ClipboardAddress, Receive } from './Asset';
 
 export default function Page({ params }: { params: { slug: string } }) {
 	let address = '';
@@ -62,7 +62,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 						/>
 						<div className='flex-1 space-y-1'>
 							<p className='text-sm font-medium leading-none'>MATIC</p>
-							<p className='text-sm text-muted-foreground'>0.0</p>
+							<Balance />
 						</div>
 						<div className='flex'>
 							<Asset tokenSymbol={'MATIC'} />

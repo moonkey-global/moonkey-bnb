@@ -21,7 +21,7 @@ import { UserOperation } from '@/lib/scripts/UserOperation';
 import { ethers } from 'ethers';
 import { parseEther } from 'ethers/lib/utils';
 import { ArrowDownLeft, ArrowUpRight, Copy } from 'lucide-react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export function ClipboardAddress() {
@@ -59,7 +59,7 @@ export const Receive = ({ address }: { address: string }) => {
 					Receive
 				</Button>
 			</DialogTrigger>
-			{isRequesting ? (
+			{!isRequesting ? (
 				<DialogContent className='sm:max-w-[425px]'>
 					<DialogHeader>
 						<DialogTitle>Payment request</DialogTitle>
@@ -106,6 +106,32 @@ export const Receive = ({ address }: { address: string }) => {
 			)}
 		</Dialog>
 	);
+};
+export const Balance = () => {
+	const [balance, setBalance] = useState('0.0');
+	const { newAddress, latestProvider } = useContext(ClientContext);
+	const getTokenBalance = async () => {
+		try {
+			const provider =
+				(await latestProvider()) as ethers.providers.JsonRpcProvider;
+			const balance = await provider.getBalance(newAddress);
+
+			setBalance(ethers.utils.formatEther(balance));
+		} catch (error) {
+			console.error(error);
+			//setBalance('0.0');
+		}
+	};
+	useEffect(() => {
+		async () => {
+			if (!latestProvider()) return;
+			await getTokenBalance();
+		};
+
+		return () => {};
+	}, [newAddress]);
+
+	return <p className='text-sm text-muted-foreground'>{balance}</p>;
 };
 function Asset(props: { tokenSymbol: string }) {
 	const tokenSymbol = props.tokenSymbol;
@@ -275,7 +301,7 @@ function Asset(props: { tokenSymbol: string }) {
 					</div>
 					<div className='grid grid-cols-4 items-center gap-4'>
 						<Label htmlFor='amount' className='text-right'>
-							Amount
+							Amount (in wei)
 						</Label>
 						<Input
 							id='ramount'
