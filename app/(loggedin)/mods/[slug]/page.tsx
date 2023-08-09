@@ -96,9 +96,9 @@ export default function Page() {
 						<div className='flex items-center space-x-4 rounded-md border p-4'>
 							<PlusCircle size={24} />
 							<div className='flex-1 space-y-1'>
-								<p className='text-sm font-medium leading-none'>Modules</p>
+								<p className='text-sm font-medium leading-none'>Plugins</p>
 								<p className='text-sm text-muted-foreground'>
-									Add your modules here
+									Add your plugin here
 								</p>
 							</div>
 						</div>

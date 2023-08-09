@@ -78,9 +78,9 @@ function Sidebar() {
 			<div className='inset-0 flex items-center place-content-center'>
 				<div className='w-3/4 border-t border-gray-500' />
 			</div>
-			<Link href={`/buy/${newAddress}`} className='no-underline text-gray-500'>
+			{/* <Link href={`/buy/${newAddress}`} className='no-underline text-gray-500'>
 				<SidebarRow Icon={BiDollarCircle} title='Buy' />
-			</Link>
+			</Link> */}
 		</div>
 	);
 }
