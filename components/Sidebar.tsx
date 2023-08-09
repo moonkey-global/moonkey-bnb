@@ -65,7 +65,7 @@ function Sidebar() {
 			</Link>
 			{/* Mods */}
 			<Link href={`/mods/${newAddress}`} className='no-underline text-gray-500'>
-				<SidebarRow Icon={AiFillTool} title='Mods' />
+				<SidebarRow Icon={AiFillTool} title='Plugins' />
 			</Link>
 			{/* Moons */}
 			<Link

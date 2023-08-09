@@ -96,7 +96,7 @@ export default function Page() {
 						<div className='flex items-center space-x-4 rounded-md border p-4'>
 							<PlusCircle size={24} />
 							<div className='flex-1 space-y-1'>
-								<p className='text-sm font-medium leading-none'>Plugins</p>
+								<p className='text-sm font-medium leading-none'>New plugin</p>
 								<p className='text-sm text-muted-foreground'>
 									Add your plugin here
 								</p>
